@@ -1,4 +1,7 @@
 from island import Island
+from data_structures.heap import MaxHeap
+from data_structures.bst import BinarySearchTree
+from data_structures.node import TreeNode
 
 class Mode1Navigator:
     """
@@ -9,13 +12,40 @@ class Mode1Navigator:
         """
         Student-TODO: Best/Worst Case
         """
-        raise NotImplementedError()
+
+        self.Islands = BinarySearchTree()
+
+        for Island in islands:
+            Current_island = Island
+
+            Key = (min(Current_island.money * crew / Current_island.marines, Current_island.money)*-1,Current_island.name)
+            
+            self.Islands[Key] = Island
+        
+
+        self.crew = crew 
 
     def select_islands(self) -> list[tuple[Island, int]]:
         """
         Student-TODO: Best/Worst Case
         """
-        raise NotImplementedError()
+
+        Current_Crew_Num = self.crew
+        List_Of_Islands = []
+        Hold_Island = (0)
+
+        for Island in self.Islands:
+            Current_island = Island
+            Current_island = Current_island.item
+
+            if Current_Crew_Num >= Current_island.marines:
+                Current_Crew_Num -= Current_island.marines
+                print(Current_Crew_Num)
+                List_Of_Islands.append((Current_island,Current_island.marines))
+        
+        return List_Of_Islands
+            
+            
 
     def select_islands_from_crew_numbers(self, crew_numbers: list[int]) -> list[float]:
         """
